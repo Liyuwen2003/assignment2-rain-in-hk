@@ -38,7 +38,6 @@ In Week 01, we explore the basics of web scraping using Python. The main script 
 - Loading environment variables with `python-dotenv`
 - Making HTTP requests with the `requests` library
 
-# Hong Kong Rainfall — One-month visualization
 
 This repository contains a one-month raindrop-style visualization of rainfall across Hong Kong stations. The animation shows per-station ripple intensity driven by daily rainfall totals collected from public meteorological sources.
 
