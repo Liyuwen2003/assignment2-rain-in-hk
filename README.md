@@ -37,39 +37,71 @@ In Week 01, we explore the basics of web scraping using Python. The main script 
 
 - Loading environment variables with `python-dotenv`
 - Making HTTP requests with the `requests` library
-- Parsing HTML using `lxml`
-- Working with XPath to extract specific data from web pages
-- File handling for storing and retrieving web content
+## Hong Kong Rainfall — One-month visualization
 
-This week establishes fundamental data collection techniques that will be used throughout the course.
+This repository now contains a focused one-month visualization of rainfall across Hong Kong stations. The animation uses a raindrop-ripple metaphor where each station produces concentric ripples proportional to daily rainfall totals.
 
-### Week 02: Data Visualization & Utilities 📊
+Contents of interest
 
-Week 02 focuses on data visualization, basic data processing, and utility scripts in Python. The folder includes:
+- `hong_kong_rainfall_1month/assignment2-for-visualization/hong_kong_rainfall_1month_1600.mp4` — High-resolution MP4 (1600×1600) for playback and sharing.
+- `hong_kong_rainfall_1month/assignment2-for-visualization/hong_kong_rainfall_1month_1600.webm` — WebM (VP9) version with better compression for web.
+- `hong_kong_rainfall_1month/assignment2-for-visualization/` — Rendering scripts, CSV pivot (`rain_by_station_90days.csv`) and helper tools used to generate the animation.
 
-- `draw_svg.py`: Script for drawing SVG graphics programmatically.
-- `multi_city_temp.py`: Handles temperature data for multiple cities, likely involving data parsing and visualization.
-- `plot_tides.py`: Plots tide data, building on the data collection from Week 01.
-- `scraping_utils.py`: Utility functions for web scraping and data handling.
-- `tides_csv.py`: Processes and saves tide data to CSV format.
-- `week02_notebook.ipynb`: Jupyter notebook with interactive code and explanations for the week's topics.
-- `requirements.txt`: Lists required Python packages for this week's exercises.
+Quick view
 
-There is also a `python_foundations/` subfolder with foundational Jupyter notebooks covering:
-- Flow control keywords
-- Functions and arguments
-- Installing and using matplotlib
-- Expanded variable types in Python
+Start a local static server from the repository root and open the preview page:
 
-These resources help reinforce core Python concepts and introduce data visualization techniques.
+```bash
+cd /Users/liyuwen/pfad
+python -m http.server 8000
+# open in a browser:
+# http://localhost:8000/hong_kong_rainfall_1month/assignment2-for-visualization/view_animation_fast.html
+```
 
-## 🧪 Extra Resources
+Or open the MP4/WebM directly in your browser or media player.
 
-The `/extra` folder contains additional code examples and experimental projects that might be helpful for your assignments:
+Regenerating the animation
 
-- Various computer vision examples with OpenCV and diffusion models
-- Nake code examples
-- Y-R-we-here project samples
+Recommended: use a Python virtual environment and install dependencies listed in `hong_kong_rainfall_1month/assignment2-for-visualization/requirements.txt`.
 
-Feel free to explore these examples for inspiration or as starting points for your own projects!
+Fast preview:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r hong_kong_rainfall_1month/assignment2-for-visualization/requirements.txt
+python generate_labeled_preview.py
+```
+
+Full render (smooth multi-frame-per-day ripples):
+
+```bash
+source .venv/bin/activate
+python hong_kong_rainfall_1month/assignment2-for-visualization/render_fast_custom.py
+```
+
+Notes about large files
+
+- GIF files can exceed 100 MB. GitHub rejects files larger than 100 MB and suggests using Git LFS for large binaries.
+- To store the GIF in the repo use Git LFS locally:
+
+```bash
+brew install git-lfs         # macOS
+git lfs install
+echo "hong_kong_rainfall_1month/assignment2-for-visualization/*.gif filter=lfs diff=lfs merge=lfs -text" >> .gitattributes
+git add .gitattributes
+git add hong_kong_rainfall_1month/assignment2-for-visualization/*.gif
+git commit -m "Add large GIF via Git LFS"
+git push <your-remote> main
+```
+
+Alternative: upload the large GIF as a GitHub Release asset (recommended for a single big file).
+
+Next steps I can help with
+
+- Add the large GIF to the repo via Git LFS (I'll prepare .gitattributes and instructions),
+- Re-encode/convert the GIF to a smaller WebM to include in the repo,
+- Tweak labels, fonts, or which stations are shown.
+
+Last updated: 2025-09-28
 
