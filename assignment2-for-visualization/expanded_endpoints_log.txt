@@ -1,0 +1,2 @@
+Detected endpoints:
+https://my.weather.gov.hk/wxinfo/json/one_json_uc.xml
